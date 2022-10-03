@@ -37,6 +37,7 @@ if( isset($_POST["login"]) ){
         //cek password
         $row = mysqli_fetch_assoc($result);
         if(password_verify($password, $row["password"]) ){
+        // if($password == $row["password"] ){
             //set session
             $_SESSION["login"] = true;
 
@@ -78,14 +79,15 @@ if( isset($_POST["login"]) ){
     <script src="assets/js/bootstrap.js"></script>
     <script src="assets/js/popper.min.js"></script>
 
-    <?php if( isset($error) ) : ?>
-    <p style="color: red; font-style : italic;"  >username/password salah</p>
-    <?php endif; ?>
-
     <main class="form-signin">
   <form role="form" action="" method="post">
     <img class="mb-4" src="assets/img/picture11.png" alt="" width="100" >
     <h1 class="h3 mb-3 fw-normal">Halaman Login</h1>
+
+    <?php if( isset($error) ) : ?>
+    <p style="color: red; font-style : italic;"  >username/password salah</p>
+    <?php endif; ?>
+
     <label for="username" class="visually-hidden">Username</label>
     <input type="text" name="username" id="username" class="form-control" placeholder="Username" required autofocus>
     <label for="password" class="visually-hidden">Password</label>
@@ -94,6 +96,7 @@ if( isset($_POST["login"]) ){
       <label>
         <input type="checkbox" value="remember-me" name="remember"> Remember me
       </label>
+      <h6><a href="registrasi.php">Registrasi</a></h6>
     </div>
     <button class="btn btn-lg btn-primary" type="submit" name="login" >Login</button>
     <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
