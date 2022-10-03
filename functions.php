@@ -1,7 +1,7 @@
 <?php 
 
 //koneksi ke database 
-$conn = mysqli_connect("localhost", "root", "", "phpdasar");
+$conn = mysqli_connect("localhost", "root", "emah1224", "phpdasar");
 
 function query($query){
     global $conn;
@@ -30,9 +30,9 @@ function tambah($data){
     }
 
     //query insert data
-    $query = "INSERT INTO mahasiswa
+    $query = "INSERT INTO mahasiswa ( nama , nim , email , jurusan , gambar )
                 VALUES 
-              ('','$nama','$nim','$email','$jurusan','$gambar');  
+              ('$nama','$nim','$email','$jurusan','$gambar');  
             ";
     mysqli_query($conn, $query);
 
@@ -109,9 +109,6 @@ function ubah($data){
         $gambar = upload();
     }
     
-
-
-
     $query = "UPDATE mahasiswa SET 
                 nama = '$nama',
                 nim = '$nim',
@@ -163,13 +160,15 @@ function registrasi($data){
     }
 
     // enkripsi password
-    // enkripsi password
     $password = password_hash($password, PASSWORD_DEFAULT);
 
     //tambahkan userbaru ke database
-    mysqli_query($conn, "INSERT INTO user VALUES ('', '$username','$password')");
+    mysqli_query($conn, "INSERT INTO user (username, password) VALUES ('$username','$password')");
 
     return mysqli_affected_rows($conn);
+
+    header("Location: index.php");
+    exit;
 }
 
 
